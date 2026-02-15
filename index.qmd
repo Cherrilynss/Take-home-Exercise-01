@@ -14,6 +14,8 @@ This analysis investigates behavioural, socioeconomic, and institutional factors
 
 # 2. Getting Started
 
+To begin the analysis, load the necessary R packages for data manipulation and visualization, and imported the dataset.
+
 ## Load Packages
 
 ```{r}
@@ -29,6 +31,8 @@ df <- read_csv("data.csv", show_col_types = FALSE)
 ```
 
 # 3. Data Pre-processing
+
+Survey responses were converted into ordered factors to preserve their ordinal ranking. A numeric GPA score was created for trend analysis. Additionally, an "Institutional Support Index" was constructed by averaging seven variables related to academic resources, producing a continuous support score from 1 to 5.
 
 ## Convert Variables to Ordered Factors
 
@@ -99,7 +103,7 @@ All coded survey responses were transformed into ordered factors to preserve ord
 
 ```{r}
 ggplot(df, aes(GPA)) +
-  geom_bar(fill = "#2C3E50") +
+  geom_bar(fill = "#377EB8FF") +
   labs(
     title = "Overall Distribution of GPA Categories",
     x = "GPA Category",
@@ -160,7 +164,7 @@ df %>%
   group_by(Father_Edu) %>%
   summarise(mean_gpa = mean(GPA_score, na.rm = TRUE)) %>%
   ggplot(aes(reorder(Father_Edu, mean_gpa), mean_gpa)) +
-  geom_col(fill = "#34495E") +
+  geom_col(fill = "#377EB8FF") +
   coord_flip() +
   labs(
     title = "Mean GPA by Father's Education Level",
@@ -172,7 +176,7 @@ df %>%
 
 ```
 
-Mean GPA increases slightly as fathers’ education levels rise. Although the difference is small, a gradual upward trend is still visible, with students from higher paternal education backgrounds performing marginally better. This may reflect variations in home support, expectations, or access to learning resources.
+Mean GPA increases slightly as fathers’ education levels rise. Although the difference is small, a gradual upward trend is still visible, with students from higher paternal education backgrounds performing marginally better. This implies that home environment and academic expectations play a role in student success.
 
 ## 4.5 Study Methods and GPA
 
@@ -185,12 +189,11 @@ ggplot(df, aes(x = Study_Methods, fill = GPA)) +
     y = "Proportion",
     fill = "GPA Level"
   ) +
-  scale_fill_brewer(palette = "Set2") +
   theme_minimal()
 
 ```
 
-Students who perceive their study methods as “Quite” or “Very” effective show significantly higher proportions of “Good” and “Excellent” GPA outcomes. Those indicating ineffective study methods display comparatively weaker performance distributions. This suggests that not only the amount of study time but also the quality of study strategies plays a crucial role in academic outcomes. The pattern highlights the importance of effective learning techniques, time management, and self-regulated learning behaviours.
+The chart clearly shows that better study methods lead to higher grades. As the effectiveness rating improves from 1 to 5, the number of students with "Good" and "Excellent" GPAs grows significantly. Meanwhile, lower grades shrink and almost disappear, suggesting that using effective study strategies is the key to achieving top scores.
 
 ## 4.6 Institutional Support Index and GPA
 
@@ -208,9 +211,7 @@ ggplot(df, aes(x = Institutional_Index, y = GPA_score)) +
 
 ```
 
-A positive slope suggests institutional environment complements individual effort.
-
-A positive linear association emerges between institutional support and GPA. Students reporting stronger institutional and academic support demonstrate higher academic performance. The regression smooth indicates a consistent upward relationship, suggesting that adaptation, lecturer support, curriculum suitability, and study methods collectively contribute to improved outcomes. This composite analysis strengthens inference beyond single-variable comparisons.
+There is a clear linear relationship between the level of institutional support and academic success. Students who report that university factors (lecturers, facilities, curriculum) have a high level of influence on them consistently achieve higher GPAs. This highlights that active engagement with university resources is a key driver of high performance.
 
 ## 4.7 Correlation Structure of Academic Determinants
 
@@ -228,7 +229,7 @@ cor_data <- df %>%
 
 ggplot(cor_data, aes(Var1, Var2, fill = Correlation)) +
   geom_tile() +
-  scale_fill_gradient2(low = "blue", high = "red", mid = "white", midpoint = 0) +
+  scale_fill_gradient2(low = "#4575B4", high = "#D73027", mid = "white", midpoint = 0) +
   coord_equal() +
   labs(
     title = "Correlation Matrix of Key Determinants",
@@ -241,14 +242,14 @@ ggplot(cor_data, aes(Var1, Var2, fill = Correlation)) +
   )
 ```
 
-The correlation matrix confirms that study time and institutional support are positively associated with GPA, while social media usage exhibits a negative correlation. Institutional support also correlates positively with study behaviour, suggesting interrelated mechanisms. The matrix provides a structural overview of relationships and validates patterns observed in earlier visuals.
+The heatmap reveals that there is almost no relationship between GPA, study time, social media usage, and the institutional index. Aside from the dark orange diagonal line (which just shows where variables match themselves), the rest of the grid is very light, representing correlations near zero. This means that for this specific group, spending more time studying does not guarantee a higher GPA, nor does using social media predict lower grades. Essentially, these factors operate independently and do not influence one another.
 
 ## 4.8 Interaction Between Study Time and Father's Education
 
 ```{r}
 df %>%
   group_by(Father_Edu, Time_Studying) %>%
-  summarise(mean_gpa = mean(GPA_score, na.rm = TRUE)) %>%
+  summarise(mean_gpa = mean(GPA_score, na.rm = TRUE), .groups = "drop") %>%
   ggplot(aes(Time_Studying, mean_gpa,
              colour = Father_Edu,
              group = Father_Edu)) +
@@ -261,6 +262,8 @@ df %>%
   )
 
 ```
+
+The chart demonstrates that while initial GPA varies significantly by a father's education level, increased study time acts as an equalizer. Students from "Primary" or "High School" backgrounds start with lower averages but show steady improvement as effort increases. Conversely, the "University" and "Other" groups exhibit more volatile patterns, though they generally maintain higher performance. By the \>8h mark, the performance gap narrows significantly, as most groups converge toward a higher Mean GPA. Ultimately, the data suggests that high study volume can mitigate the impact of socioeconomic background on academic success.
 
 ## 4.9 Adaptation to University and GPA
 
@@ -276,7 +279,7 @@ ggplot(df, aes(x = Adapt_Learning_Uni, fill = GPA)) +
 
 ```
 
-A strong positive relationship is visible between adaptation level and GPA. Students reporting “Very” high adaptation demonstrate the largest share of “Excellent” and “Good” outcomes. In contrast, students struggling to adapt show higher proportions of lower GPA categories. This suggests that successful adjustment to the university environment may be critical for academic success. Adaptation likely influences engagement, motivation, and learning efficiency, making it an important institutional and psychological factor.
+Adaptation to the university environment shows a clear positive correlation with GPA, particularly at the higher ends of the scale. As students report higher levels of adaptation, the proportion of "Good" and "Excellent" grades expands considerably, while the "Poor" and "Average" grades diminishes. While there is a slight dip in "Good" grades at level 2 compared to level 1, the overall trend confirms that students who feel well-adjusted to their environment are far more likely to secure top academic results.
 
 ## 4.10 Academic Performance by Behavioural-Support Profiles
 
@@ -307,20 +310,16 @@ df %>%
 
 ```
 
+The data on behavioral-support profiles illustrates that a strong support system is a critical for academic success. Students with "High Study & High Support" achieve the highest mean GPA, but interestingly, those with "Low Study & High Support" perform better than students who have high study habits but low support. This suggests that having external helps can compensate for less rigorous individual study, whereas isolation negatively impacts grades even when study effort is high. The most significant drop in performance occurs for students with "Low Study & Low Support," whose mean GPA falls drastically below 3.0, highlighting the danger of lacking both personal discipline and a safety net.
+
 # 5. Summary and Conclusion
 
-This visual analytics study reveals that academic performance is shaped by both behavioural and structural factors.
+This study confirms that academic performance is a multidimensional outcome.
 
-Key findings:
+-   Perceived Impact: Students perform better when they feel their study methods and university support systems are actively influencing their outcomes.
 
--   Study time exhibits the strongest positive association with GPA.
+-   Environment: Adaptation to the university environment is a strong predictor of success.
 
--   Social media usage shows a modest negative relationship.
+-   Interaction: Personal effort can mitigate socioeconomic disadvantages, while external support systems can buffer against lower individual study intensity.
 
--   Parental education reveals a consistent socioeconomic gradient.
-
--   Institutional support enhances academic outcomes.
-
--   Effort partially compensates for structural disadvantage.
-
-Academic success emerges from a multidimensional system rather than a single determinant.
+Success requires a balance of personal discipline, effective adaptation, and active engagement with the university's support systems.

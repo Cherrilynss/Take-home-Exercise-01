@@ -196,7 +196,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="distribution-of-academic-performance">4.1 Distribution of Academic Performance</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(GPA)) <span class="sc">+</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"#2C3E50"</span>) <span class="sc">+</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"#377EB8FF"</span>) <span class="sc">+</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Overall Distribution of GPA Categories"</span>,</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"GPA Category"</span>,</span>
@@ -273,7 +273,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Father_Edu) <span class="sc">%&gt;%</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_gpa =</span> <span class="fu">mean</span>(GPA_score, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">reorder</span>(Father_Edu, mean_gpa), mean_gpa)) <span class="sc">+</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"#34495E"</span>) <span class="sc">+</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"#377EB8FF"</span>) <span class="sc">+</span></span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Mean GPA by Father's Education Level"</span>,</span>
@@ -300,9 +300,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Effect of Study Methods on GPA"</span>,</span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Effectiveness of Study Methods"</span>,</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Proportion"</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Proportion"</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"GPA Level"</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -311,7 +312,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Students who perceive their study methods as “Quite” or “Very” effective show significantly higher proportions of “Good” and “Excellent” GPA outcomes. Those indicating ineffective study methods display comparatively weaker performance distributions. This suggests that not only the amount of study time but also the quality of study strategies plays a crucial role in academic outcomes. The pattern highlights the importance of effective learning techniques, time management, and self-regulated learning behaviours.</p>
+<p>The chart clearly shows that better study methods lead to higher grades. As the effectiveness rating improves from 1 to 5, the number of students with “Good” and “Excellent” GPAs grows significantly. Meanwhile, lower grades shrink and almost disappear, suggesting that using effective study strategies is the key to achieving top scores.</p>
 </section>
 <section id="institutional-support-index-and-gpa" class="level2">
 <h2 class="anchored" data-anchor-id="institutional-support-index-and-gpa">4.6 Institutional Support Index and GPA</h2>
@@ -334,8 +335,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>A positive slope suggests institutional environment complements individual effort.</p>
-<p>A positive linear association emerges between institutional support and GPA. Students reporting stronger institutional and academic support demonstrate higher academic performance. The regression smooth indicates a consistent upward relationship, suggesting that adaptation, lecturer support, curriculum suitability, and study methods collectively contribute to improved outcomes. This composite analysis strengthens inference beyond single-variable comparisons.</p>
+<p>A positive linear trend shows that stronger institutional support is associated with higher GPA. Students who report better academic resources, lecturer support, suitable curriculum, and effective study methods tend to perform better. This suggests that the institutional environment complements individual effort and contributes to improved academic outcomes.</p>
 </section>
 <section id="correlation-structure-of-academic-determinants" class="level2">
 <h2 class="anchored" data-anchor-id="correlation-structure-of-academic-determinants">4.7 Correlation Structure of Academic Determinants</h2>
@@ -353,7 +353,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(cor_data, <span class="fu">aes</span>(Var1, Var2, <span class="at">fill =</span> Correlation)) <span class="sc">+</span></span>
 <span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">"blue"</span>, <span class="at">high =</span> <span class="st">"red"</span>, <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">midpoint =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">"#4575B4"</span>, <span class="at">high =</span> <span class="st">"#D73027"</span>, <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">midpoint =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
 <span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
 <span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Correlation Matrix of Key Determinants"</span>,</span>
@@ -372,14 +372,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>The correlation matrix confirms that study time and institutional support are positively associated with GPA, while social media usage exhibits a negative correlation. Institutional support also correlates positively with study behaviour, suggesting interrelated mechanisms. The matrix provides a structural overview of relationships and validates patterns observed in earlier visuals.</p>
+<p>The heatmap reveals that there is almost no relationship between GPA, study time, social media usage, and the institutional index. Aside from the dark orange diagonal line (which just shows where variables match themselves), the rest of the grid is very light, representing correlations near zero. This means that for this specific group, spending more time studying does not guarantee a higher GPA, nor does using social media predict lower grades. Essentially, these factors operate independently and do not influence one another.</p>
 </section>
 <section id="interaction-between-study-time-and-fathers-education" class="level2">
 <h2 class="anchored" data-anchor-id="interaction-between-study-time-and-fathers-education">4.8 Interaction Between Study Time and Father’s Education</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Father_Edu, Time_Studying) <span class="sc">%&gt;%</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_gpa =</span> <span class="fu">mean</span>(GPA_score, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_gpa =</span> <span class="fu">mean</span>(GPA_score, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Time_Studying, mean_gpa,</span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">colour =</span> Father_Edu,</span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">group =</span> Father_Edu)) <span class="sc">+</span></span>
@@ -398,6 +398,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<p>The chart demonstrates that while initial GPA varies significantly by a father’s education level, increased study time acts as an equalizer. Students from “Primary” or “High School” backgrounds start with lower averages but show steady improvement as effort increases. Conversely, the “University” and “Other” groups exhibit more volatile patterns, though they generally maintain higher performance. By the &gt;8h mark, the performance gap narrows significantly, as most groups converge toward a higher Mean GPA. Ultimately, the data suggests that high study volume can mitigate the impact of socioeconomic background on academic success.</p>
 </section>
 <section id="adaptation-to-university-and-gpa" class="level2">
 <h2 class="anchored" data-anchor-id="adaptation-to-university-and-gpa">4.9 Adaptation to University and GPA</h2>
@@ -418,7 +419,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>A strong positive relationship is visible between adaptation level and GPA. Students reporting “Very” high adaptation demonstrate the largest share of “Excellent” and “Good” outcomes. In contrast, students struggling to adapt show higher proportions of lower GPA categories. This suggests that successful adjustment to the university environment may be critical for academic success. Adaptation likely influences engagement, motivation, and learning efficiency, making it an important institutional and psychological factor.</p>
+<p>Adaptation to the university environment shows a clear positive correlation with GPA, particularly at the higher ends of the scale. As students report higher levels of adaptation, the proportion of “Good” and “Excellent” grades expands considerably, while the “Poor” and “Average” grades diminishes. While there is a slight dip in “Good” grades at level 2 compared to level 1, the overall trend confirms that students who feel well-adjusted to their environment are far more likely to secure top academic results.</p>
 </section>
 <section id="academic-performance-by-behavioural-support-profiles" class="level2">
 <h2 class="anchored" data-anchor-id="academic-performance-by-behavioural-support-profiles">4.10 Academic Performance by Behavioural-Support Profiles</h2>
@@ -452,6 +453,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<p>The data on behavioral-support profiles illustrates that a strong support system is a critical for academic success. Students with “High Study &amp; High Support” achieve the highest mean GPA, but interestingly, those with “Low Study &amp; High Support” perform better than students who have high study habits but low support. This suggests that having external helps can compensate for less rigorous individual study, whereas isolation negatively impacts grades even when study effort is high. The most significant drop in performance occurs for students with “Low Study &amp; Low Support,” whose mean GPA falls drastically below 3.0, highlighting the danger of lacking both personal discipline and a safety net.</p>
 </section>
 </section>
 <section id="summary-and-conclusion" class="level1">
